@@ -12,9 +12,45 @@ namespace PONG
 {
     public partial class Form1 : Form
     {
+        public int BallWidht { get; set; }
+        public int BallHeight { get; set; }
+
+        public int SchlaegerLHoehe { get; set; }
+        public int SchlaegerLBreite { get; set; }
+        public int SchlaegerRHoehe { get; set; }
+        public int SchlaegerRBreite { get; set; }
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+
+            //Pinsel wird erstellt mit der Farbe rot
+            SolidBrush myBrush = new SolidBrush(Color.Black);
+            SolidBrush schlägerBrush = new SolidBrush(Color.Blue);
+
+            Graphics formGraphics;
+
+            //Kreis wird erstellt
+            formGraphics = this.CreateGraphics();
+
+            //Kreis wird gemalt
+            formGraphics.FillEllipse(myBrush, new Rectangle(BallWidht, BallHeight, 50, 50));
+            Rectangle schläger_L = new Rectangle(SchlaegerLBreite, SchlaegerLHoehe, 25, 150);
+            formGraphics.FillRectangle(schlägerBrush, schläger_L);
+            Rectangle schläger_R = new Rectangle(SchlaegerRBreite, SchlaegerRHoehe, 25, 150);
+            formGraphics.FillRectangle(schlägerBrush, schläger_R);
+            myBrush.Dispose();
+            formGraphics.Dispose();
         }
     }
 }
