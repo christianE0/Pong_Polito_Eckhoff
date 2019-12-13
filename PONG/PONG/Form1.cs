@@ -20,6 +20,13 @@ namespace PONG
         public int SchlaegerRHoehe { get; set; }
         public int SchlaegerRBreite { get; set; }
 
+        private void ball_Tick(object sender, EventArgs e)
+        {
+            BallWidht += 10;
+            LinkerBalken();
+            RechterBalken();
+            this.Invalidate();
+        }
         public Form1()
         {
             InitializeComponent();
