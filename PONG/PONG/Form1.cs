@@ -12,6 +12,14 @@ namespace PONG
 {
     public partial class Form1 : Form
     {
+        //Bool für die Balken
+        bool linksHoch;
+        bool linksRunter;
+
+        bool rechtsHoch;
+        bool rechtsRunter;
+
+        //Konstruktoren für die Balken + dem Ball, damit wir diese im ganzen Programm benutzen können
         public int BallWidht { get; set; }
         public int BallHeight { get; set; }
 
@@ -20,16 +28,33 @@ namespace PONG
         public int SchlaegerRHoehe { get; set; }
         public int SchlaegerRBreite { get; set; }
 
+        public Form1()
+        {
+            InitializeComponent();
+            // Einen neuen Timer erstellen
+            InitializeComponent();
+            Timer ball = new Timer();
+            //Werte des Timers bestimmen
+            ball.Interval = 100;
+            ball.Tick += new EventHandler(ball_Tick);
+            ball.Start();
+
+            // Breite und Höhe des Ball und der Balken bestimmen
+            BallHeight = (this.ClientSize.Height / 2) - 25;
+            BallWidht = (this.ClientSize.Width / 2) - 25;
+
+            SchlaegerLBreite = 10;
+            SchlaegerLHoehe = (this.ClientSize.Height / 2) - 75;
+
+            SchlaegerRBreite = this.ClientSize.Width - 30;
+            SchlaegerRHoehe = (this.ClientSize.Height / 2) - 75;
+        }
         private void ball_Tick(object sender, EventArgs e)
         {
             BallWidht += 10;
             LinkerBalken();
             RechterBalken();
             this.Invalidate();
-        }
-        public Form1()
-        {
-            InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
